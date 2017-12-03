@@ -1,0 +1,35 @@
+{
+  "name": "classy-json",
+  "version": "1.0.0",
+  "description": "Parse json ES6 and Typescript classes, maintaining object hierarchies and custom toJSON methods",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist/* && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mszlapa/classy-json.git"
+  },
+  "keywords": [
+    "JSON",
+    "parse",
+    "TypeScript",
+    "ES6",
+    "class",
+    "javascript",
+    "serialize",
+    "deserialize"
+  ],
+  "author": "Michael Szlapa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mszlapa/classy-json/issues"
+  },
+  "homepage": "https://github.com/mszlapa/classy-json#readme",
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "typescript": "^2.6.2"
+  }
+}
