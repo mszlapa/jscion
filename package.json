@@ -1,5 +1,5 @@
 {
-  "name": "classy-json",
+  "name": "classic-json",
   "version": "0.0.9",
   "description": "Parse json ES6 and Typescript classes, maintaining object hierarchies and custom toJSON methods",
   "main": "./dist/index.js",

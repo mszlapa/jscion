@@ -1,10 +1,10 @@
-# Classy-json  
+# classic-json
 
 ##JSON support for  TypeScript/ES6 classes
 
 
 
-Classy json allows serialization of Javascript class instances into json.
+**classic-json** allows serialization of Javascript class instances into json.
  
 Deserialized objects are instances of the classes they represented. 
  
