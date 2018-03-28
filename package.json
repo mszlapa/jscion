@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mszlapa/classy-json.git"
+    "url": "git+https://github.com/mszlapa/classic-json.git"
   },
   "keywords": [
     "JSON",
@@ -25,9 +25,9 @@
   "author": "Michael Szlapa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mszlapa/classy-json/issues"
+    "url": "https://github.com/mszlapa/classic-json/issues"
   },
-  "homepage": "https://github.com/mszlapa/classy-json#readme",
+  "homepage": "https://github.com/mszlapa/classic-json#readme",
   "devDependencies": {
     "rimraf": "^2.6.2",
     "typescript": "^2.6.2"
