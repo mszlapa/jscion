@@ -1,16 +1,14 @@
 // SERIALIZATION SUPPORT
 
 
-const METADATA_NAMESPACE = '__meta__classyjson_';
+const METADATA_NAMESPACE = '__meta__jscion_';
 
 
 const DEFAULTS = {
     namespace: METADATA_NAMESPACE,
-    stringifySpaces: null,
-    enhanceToJSON: false,             // todo enhance toJSON method of decorated class
-    preserveMetadataOnLoad: false,
-    addMetadataToAllClasses: true
-    //handleCircularDependencies      - wishful thinking at the moment
+    stringifySpaces: null,              // number of spaces used for formatting
+    allowMetadataFieldInObjects: true,  // serialized objects will be mutated by having the metadata added (faster), deserialized objects will preserve metadat from JSON
+    serializeAllClassesMetadata: false  // save metadata class information even if class is not marked as serializable
 };
 
 
@@ -20,38 +18,42 @@ const config = Object.assign({}, DEFAULTS);
 const serializableClassRegistry = {};
 
 // marks a class as Serializable, can be used as class decorator
-const markAsSerializable = (serializableClass) => {
+const serializable = (serializableClass) => {
     // this takes class not instance so instead of it.constructor.name we use it.name
     serializableClassRegistry[serializableClass.name] = serializableClass.prototype;
 };
 
 
 const stringifyReplacer = (key: string, value: any) => {
-    if (value && value.constructor && value.constructor.name
-        && value.constructor.name !== 'Object' && value.constructor.name !== 'Number' && value.constructor.name !== 'String'
-        && (config.addMetadataToAllClasses || serializableClassRegistry[value.constructor.name] )
+    let result = value;
+    if (result && result.constructor && result.constructor.name
+        && result.constructor.name !== 'Object' && result.constructor.name !== 'Number' && result.constructor.name !== 'String'
+        && (config.serializeAllClassesMetadata || serializableClassRegistry[result.constructor.name] )
     ) {
         // enhance json with class information
-        value[METADATA_NAMESPACE] = {name: value.constructor.name};
+        let constructorName = result.constructor.name;
+        // if mutating objects is not allowed, clone first
+        result = !config.allowMetadataFieldInObjects ? Object.assign( {}, result) : result;
+        result[config.namespace] = {name: constructorName};
     }
-    return value;
+    return result;
 };
 
 
 // use enhanced json to rebuild classes
 const parseReviver = (key: string, value: any) => {
 
-    if (value && value[METADATA_NAMESPACE]) {
+    if (value && value[config.namespace]) {
 
-        const className = value[METADATA_NAMESPACE].name;
+        const className = value[config.namespace].name;
         const prototype = serializableClassRegistry[className];
 
-        if (!config.preserveMetadataOnLoad) {
-            delete value[METADATA_NAMESPACE]; // remove metadata that came on parsed json
+        if (!config.allowMetadataFieldInObjects) {
+            delete value[config.namespace]; // remove metadata that came on parsed json
         }
 
         if (!prototype) {
-            console.error(`Cant deserialize unknown class ${className}, register class with markAsSerializable(${className} before parsing JSON)`);
+            (config.serializeAllClassesMetadata ? console.log : console.error)(`Can't deserialize unknown class ${className}, register class with serializable(${className} before parsing JSON)`);
             return value; // return as is
         }
 
@@ -69,11 +71,12 @@ const parse = (jsonString: string) => JSON.parse(jsonString, parseReviver);
 
 
 // because namespaces save people from guessing
-export const ClassyJson = Object.freeze({
+export const jscion = Object.freeze({
     stringify,
     parse,
-    markAsSerializable,
-    config
+    serializable,
+    config,
+    DEFAULTS,
 });
 
 

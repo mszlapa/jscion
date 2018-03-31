@@ -1,12 +1,12 @@
 
-// USING SERIALIZATION EXAMPLE   ---------------
+// Basic SERIALIZATION EXAMPLE    ---------------
 
 // define serializable class implementing logic
 
-import {ClassyJson} from '../index';
+import {jscion} from '../index';
 
 // format json nicely
-ClassyJson.config.stringifySpaces = 2;
+jscion.config.stringifySpaces = 2;
 
 class Car {
     model: string;
@@ -23,21 +23,21 @@ class Car {
         console.log(`Hello I am ${this.model}`);
     };
 }
-ClassyJson.markAsSerializable(Car);
+jscion.serializable(Car);
 
 console.log('\n\n\nSerialization example ------');
 
 const car = new Car();
-car.model = 'Toyota Prius';
+car.model = 'Tesla Model 3';
 
 
-const jsonString = ClassyJson.stringify(car);
-console.log('\nJSON with metadata: ', jsonString);
+const jsonString = jscion.stringify(car);
+console.log('\nJSON with metadata: \n', jsonString);
 
 
-const rehydratedCar = ClassyJson.parse(jsonString);
-console.log('\nRehydrated using metadata: ', rehydratedCar);
+const rehydratedCar = jscion.parse(jsonString);
+console.log('\nRehydrated using metadata:\n', rehydratedCar);
 
-console.log('Now you can invoke operation on rehydrated object:');
+console.log('\n\nNow you can invoke operation on rehydrated object:');
 rehydratedCar.sayHello();
 

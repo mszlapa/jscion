@@ -1,10 +1,10 @@
 
-// USING SERIALIZATION EXAMPLE   ---------------
+//  SERIALIZATION EXAMPLE using TypeScript and decorators  ---------------
 
 
-import {ClassyJson} from '../index';
+import {jscion} from '../index';
 
-@ClassyJson.markAsSerializable
+@jscion.serializable
 class Car {
     model: string;
 
@@ -25,15 +25,15 @@ console.log('\n\n\nSerialization example ------');
 
 
 const car = new Car();
-car.model = 'Toyota Prius';
+car.model = 'Tesla Model 3';
 
-const jsonString = ClassyJson.stringify(car);
+const jsonString = jscion.stringify(car);
 console.log('\nJSON with metadata: ', jsonString);
 
 
-const rehydratedCar = ClassyJson.parse(jsonString);
+const rehydratedCar = jscion.parse(jsonString);
 console.log('\nRehydrated using metadata: ', rehydratedCar);
 
-console.log('Now you can invoke operation on rehydrated object: ');
+console.log('\n\nNow you can invoke operation on rehydrated object: ');
 rehydratedCar.sayHello();
 

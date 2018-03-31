@@ -1,16 +1,16 @@
 {
-  "name": "classic-json",
+  "name": "jscion",
   "version": "0.0.9",
-  "description": "Parse json ES6 and Typescript classes, maintaining object hierarchies and custom toJSON methods",
+  "description": "JavaScript Class Instance and Object Notation. Parse json ES6 and Typescript classes, maintaining object hierarchies and custom toJSON methods",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist/* && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && mocha  --recursive dist/tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mszlapa/classic-json.git"
+    "url": "git+https://github.com/mszlapa/jscion.git"
   },
   "keywords": [
     "JSON",
@@ -25,11 +25,18 @@
   "author": "Michael Szlapa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mszlapa/classic-json/issues"
+    "url": "https://github.com/mszlapa/jscion/issues"
   },
-  "homepage": "https://github.com/mszlapa/classic-json#readme",
+  "homepage": "https://github.com/mszlapa/jscion#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5",
     "rimraf": "^2.6.2",
-    "typescript": "^2.6.2"
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^5.0.0"
   }
 }

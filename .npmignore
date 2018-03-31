@@ -1,3 +1,5 @@
 /src
 /dist/tests
 /dist/examples
+/.idea
+/node_modules
