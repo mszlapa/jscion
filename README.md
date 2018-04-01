@@ -1,17 +1,19 @@
 # JSCION
 
-##JSON support for TypeScript/ES6 classes
+JavaScript Class Instance and plain Object Notation
+
+## JSON support for TypeScript/ES6 classes  
 
 
 
 **JSCION** allows deserialization of fully functional class instances from JSON.
  
-Deserialized objects are instances of the classes they represented, during serialization.   
+Deserialized objects are instances of the classes they represented during serialization.   
  
  
- **Example**
+**Example**
  
- Annotate a class as serializable
+Annotate a class as serializable
  
  ````
 import {jscion} from '../index';
@@ -35,7 +37,7 @@ const jsonString = jscion.stringify(car);
 
 ````
 
-Parsing of the JSON produces functioning instances of the class. 
+Parsing this JSON string will produce a fully functioning instance of the class original. 
 
 
 ````
@@ -47,7 +49,19 @@ Now you can invoke operation on deserialized class instance:
 ````
 deserializedCar.sayHello();
 ````
-See examples in the examples folder.
+
+See more in the examples folder.
 
 
+** Limitations **
 
+JSCION will add metadata information to class instances being serialized, therefore serialization will mutate data.
+
+If this can be switched off in configuration
+
+```
+        jscion.config.allowMetadataFieldInObjects = false;
+``` 
+
+doing so will cause jscion to clone class intances being serialized, possibly incurring performance penalty.
+See tests for usage and implications
