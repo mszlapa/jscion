@@ -1,6 +1,6 @@
 {
   "name": "jscion",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "JavaScript Class Instance and Object Notation. Parse json ES6 and Typescript classes, maintaining object hierarchies and custom toJSON methods",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
