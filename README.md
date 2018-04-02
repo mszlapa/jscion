@@ -53,15 +53,16 @@ deserializedCar.sayHello();
 See more in the examples folder.
 
 
-** Limitations **
+**Limitations**
 
-JSCION will add metadata information to class instances being serialized, therefore serialization will mutate data.
+JSCION will add metadata information to class instances being serialized, therefore calling `jscion.stringify(data` will mutate `data`.
 
-If this can be switched off in configuration
+This can be switched off in configuration
 
 ```
         jscion.config.allowMetadataFieldInObjects = false;
 ``` 
 
 doing so will cause jscion to clone class intances being serialized, possibly incurring performance penalty.
-See tests for usage and implications
+
+See test `src/tests/2_configuration.ts` for usage and implications.
