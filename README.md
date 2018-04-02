@@ -60,9 +60,11 @@ See more in the examples folder.
 
 ### Limitations
 
-You must use JSCION to serialize object to string. Parsing output of built in JSON.stringify will not automagicaly recreate classes. JSCION adds meta data to generated json string, which allows it to recreate object instances.   
+You must use JSCION to serialize object to string. Parsing output of built in JSON.stringify will not automagicaly recreate classes. JSCION adds meta data to generated json string, which allows it to recreate class instances  by providing it with a right `prototype`.  
 
-JSCION will add metadata information to class instances being serialized, therefore calling `jscion.stringify(data` will mutate `data`.
+Classes (object prototypes) are matched by name. If you serialized a `class Car` into a String and later deserialized this String inside another process that implements a different `@jscion.serializable class Car` you need to ensure that both classes are compatible. Serialization allows your data models travel in space and time, travel safely. 
+
+JSCION will add metadata information to class instances being serialized, therefore calling `jscion.stringify(data)` will mutate `data` object.
 
 This can be switched off in configuration
 
@@ -94,7 +96,7 @@ class Car {
 jscion.serializable(Car);
 ````
 
-#### Your IDE flags decorator method:
+#### Your IDE flags decorator method
 Alias decorator method:
 ````
 const jscionSerializable = jscion.serializable;
