@@ -5,7 +5,7 @@ const METADATA_NAMESPACE = '__meta__jscion_';
 
 
 const DEFAULTS = {
-    namespace: METADATA_NAMESPACE,
+    namespace: METADATA_NAMESPACE,      // key under which metadata is stored
     stringifySpaces: null,              // number of spaces used for formatting
     allowMetadataFieldInObjects: true,  // serialized objects will be mutated by having the metadata added (faster), deserialized objects will preserve metadat from JSON
     serializeAllClassesMetadata: false  // save metadata class information even if class is not marked as serializable
@@ -72,6 +72,8 @@ const parse = (jsonString: string) => JSON.parse(jsonString, parseReviver);
 
 // because namespaces save people from guessing
 export const jscion = Object.freeze({
+    stringifyReplacer,
+    parseReviver,
     stringify,
     parse,
     serializable,
