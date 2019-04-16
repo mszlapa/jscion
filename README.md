@@ -2,8 +2,7 @@
 
 JavaScript **Class Instance** and plain Object Notation - adds TypeScript/ES6 class support to JSON.
  
- **JSCION** allows deserialization of fully functional class instances from JSON. Parsing results are not limited to plain objects, 
- but can also include instances of the classes.  
+ **JSCION** allows deserialization of fully functional class instances from JSON. Unlike plain JSON parsing results are not limited to plain objects,  but may also include instances of the classes.  
  
  
  **How is it different from plain JSON?**
@@ -45,10 +44,10 @@ const deserializedCar = jscion.parse(jsonString);
 
 Newly parsed object is an class instance of the correct class:
 ````
-console.log('It is a real class instance:', rehydratedCar instanceof Car);  // => true
+console.log('It is a real class instance:', deserializedCar instanceof Car);  // => true
 ````
 
-on which  class methods can be invoked:
+on which class methods can be invoked:
 ````
 deserializedCar.sayHello();   //  =>  Hello I am Tesla Model 3
 ````
